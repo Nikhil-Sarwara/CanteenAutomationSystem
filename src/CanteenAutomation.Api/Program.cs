@@ -55,6 +55,17 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("WebAppPolicy",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:5173") // The address of your React app
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -90,6 +101,8 @@ using (var scope = app.Services.CreateScope())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseCors("WebAppPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

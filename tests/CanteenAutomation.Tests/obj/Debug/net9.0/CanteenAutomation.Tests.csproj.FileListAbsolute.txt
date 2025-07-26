@@ -585,3 +585,4 @@
 /Users/nikhilsarwara/Desktop/CanteenAutomationSystem/tests/CanteenAutomation.Tests/obj/Debug/net9.0/CanteenAutomation.Tests.pdb
 /Users/nikhilsarwara/Desktop/CanteenAutomationSystem/tests/CanteenAutomation.Tests/obj/Debug/net9.0/CanteenAutomation.Tests.genruntimeconfig.cache
 /Users/nikhilsarwara/Desktop/CanteenAutomationSystem/tests/CanteenAutomation.Tests/obj/Debug/net9.0/ref/CanteenAutomation.Tests.dll
+/Users/nikhilsarwara/Desktop/CanteenAutomationSystem/tests/CanteenAutomation.Tests/obj/Debug/net9.0/CanteenAutomation.Tests.sourcelink.json
