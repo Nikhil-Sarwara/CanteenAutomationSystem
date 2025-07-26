@@ -19,11 +19,13 @@ const API_URL = "http://localhost:5154";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
   const { login } = useAuth(); // Get the login function from context
 
   const handleSubmit = async (e) => {
+    setIsLoading(true); // Start loading
     e.preventDefault();
     try {
       const response = await axios.post(`${API_URL}/api/auth/login`, {
@@ -41,6 +43,8 @@ const Login = () => {
         isClosable: true,
       });
     }
+
+    setIsLoading(false); // Stop loading
   };
 
   return (
@@ -76,7 +80,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormControl>
-          <Button width="full" mt={4} type="submit">
+          <Button isLoading={isLoading} width="full" mt={4} type="submit">
             Login
           </Button>
         </VStack>
