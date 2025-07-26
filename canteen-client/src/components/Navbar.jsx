@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext"; // Import useAuth hook
 import { useCart } from "../context/CartContext";
 import { Icon } from "@chakra-ui/react";
 import { FaShoppingCart } from "react-icons/fa";
+import { Badge } from "@chakra-ui/react";
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth(); // Get auth state and logout function

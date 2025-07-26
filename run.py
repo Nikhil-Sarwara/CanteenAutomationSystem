@@ -73,6 +73,18 @@ def run_redis_container():
     print(f"\n--- Preparing to run Redis container ---")
     subprocess.run(["docker", "run", "-d", "-p", "6379:6379", "redis"], capture_output=True, text=True)
 
+def run_db_container():
+    """Runs a PostgreSQL container."""
+    print(f"\n--- Preparing to run PostgreSQL container ---")
+    subprocess.run([
+        "docker", "run", "-d", "--name", "canteen-db",
+        "-p", "5432:5432",
+        "-e", f"POSTGRES_USER={DB_USER}",
+        "-e", f"POSTGRES_PASSWORD={DB_PASSWORD}",
+        "-e", f"POSTGRES_DB={DB_NAME}",
+        "postgres"
+    ], capture_output=True, text=True)
+
 def run_container():
     """Stops, removes, and runs the Docker container."""
     print(f"\n--- Preparing to run container '{CONTAINER_NAME}' ---")
@@ -111,10 +123,11 @@ def main():
         print("2. Test Redis Connection")
         print("3. Build Docker Image")
         print("4. Run Docker Redis")
-        print("5. Run Docker Container")
-        print("6. Exit")
+        print("5. Run Docker PostgreSQL")
+        print("6. Run Docker Container")
+        print("7. Exit")
         
-        choice = input("Enter your choice (1-6): ")
+        choice = input("Enter your choice (1-7): ")
         
         if choice == '1':
             test_db_connection()
@@ -125,12 +138,14 @@ def main():
         elif choice == '4':
             run_redis_container()
         elif choice == '5':
-            run_container()
+            run_db_container()
         elif choice == '6':
+            run_container()
+        elif choice == '7':
             print("Exiting.")
             sys.exit(0)
         else:
-            print("Invalid choice. Please enter a number between 1 and 6.")
+            print("Invalid choice. Please enter a number between 1 and 7.")
 
 if __name__ == "__main__":
     main()

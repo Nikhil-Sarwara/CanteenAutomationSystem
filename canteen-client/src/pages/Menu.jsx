@@ -14,6 +14,7 @@ import {
   Spinner,
   Alert,
   AlertIcon,
+  Skeleton,
 } from "@chakra-ui/react";
 import apiClient from "../apiClient"; // Use our new API client
 
@@ -53,7 +54,13 @@ const Menu = () => {
   }, []); // The empty array ensures this runs only once when the component mounts
 
   if (loading) {
-    return <Spinner size="xl" />;
+    return (
+      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={6}>
+        {[...Array(4)].map((_, i) => (
+          <Skeleton key={i} height="300px" borderRadius="lg" />
+        ))}
+      </SimpleGrid>
+    );
   }
 
   if (error) {
