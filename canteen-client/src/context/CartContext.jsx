@@ -22,7 +22,11 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const value = { cartItems, addToCart };
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  const value = { cartItems, addToCart, clearCart };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

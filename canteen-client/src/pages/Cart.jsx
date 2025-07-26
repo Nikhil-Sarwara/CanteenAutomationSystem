@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../apiClient";
 
 const Cart = () => {
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -35,6 +35,9 @@ const Cart = () => {
 
     try {
       await apiClient.post("/api/order", orderRequest);
+
+      // Clear Cart
+      clearCart();
       toast({
         title: "Order placed!",
         description: "Your order has been sent to the kitchen.",
