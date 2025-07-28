@@ -11,6 +11,7 @@ import StaffDashboard from "./pages/StaffDashboard";
 import AdminReports from "./pages/AdminReports";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MenuManagement from "./pages/MenuManagement";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -19,14 +20,7 @@ function App() {
       <main>
         <Routes>
           {/* Public Routes */}
-          <Route
-            path="/"
-            element={
-              <Heading textAlign="center" mt={10}>
-                Welcome Home!
-              </Heading>
-            }
-          />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 

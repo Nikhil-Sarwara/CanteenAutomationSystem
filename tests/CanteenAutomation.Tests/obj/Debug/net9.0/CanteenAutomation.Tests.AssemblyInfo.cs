@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CanteenAutomation.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82220bd05c14c6905f0bb1f26d4decd362864473")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2006b2918730ba0c3e73f651a5cdc5b54e87c72")]
 [assembly: System.Reflection.AssemblyProductAttribute("CanteenAutomation.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CanteenAutomation.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

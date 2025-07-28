@@ -1,4 +1,5 @@
 using System.Text;
+using CanteenAutomation.Infrastructure.Persistence.Identity;
 using CanteenAutomation.Infrastructure.Validation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -29,8 +30,11 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
 
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddSignalR();
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+// Configure ASP.NET Identity to use your custom User entity and IdentityRole
+builder.Services.AddIdentity<User, IdentityRole>() // Now correctly references User from Infrastructure
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddValidatorsFromAssemblyContaining<OrderRequestValidator>();

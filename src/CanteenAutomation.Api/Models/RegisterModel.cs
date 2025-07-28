@@ -1,14 +1,10 @@
-using System.ComponentModel.DataAnnotations;
-
-public class RegisterModel
+namespace CanteenAutomation.Api.Models
 {
-    [Required]
-    [EmailAddress]
-    public string Email { get; set; } = string.Empty; // Initialize
-
-    [Required]
-    public string Username { get; set; } = string.Empty; // Initialize
-
-    [Required]
-    public string Password { get; set; } = string.Empty; // Initialize
+    public class RegisterModel
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string? Role { get; set; }
+    }
 }

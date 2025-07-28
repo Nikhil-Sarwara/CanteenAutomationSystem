@@ -32,19 +32,48 @@ const Login = () => {
         username,
         password,
       });
-      login(response.data.token); // Save token to global state and local storage
-      navigate("/"); // Redirect to home page on success
+
+      const token = response.data.token;
+      login(token); // Save token to global state and local storage
+
+      const profileResponse = await axios.get(`${API_URL}/api/auth/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const userRoles = profileResponse.data.roles;
+      console.log("User roles:", profileResponse);
+
+      let redirectTo = "/"; // Default redirect for 'User'
+
+      if (userRoles) {
+        // Ensure userRoles is an array for consistent checking
+        const rolesArray = Array.isArray(userRoles) ? userRoles : [userRoles];
+
+        // Prioritize redirection based on roles (e.g., Admin > Staff > User)
+        if (rolesArray.includes("Admin")) {
+          redirectTo = "/admin-dashboard";
+        } else if (rolesArray.includes("Staff")) {
+          redirectTo = "/staff-dashboard";
+        }
+        // If neither Admin nor Staff, it defaults to "/" (for "User")
+      }
+
+      navigate(redirectTo); // Redirect to the appropriate page
     } catch (error) {
+      console.error("Login error:", error); // Log the actual error for debugging
       toast({
         title: "Login failed.",
-        description: "Invalid username or password.",
+        description:
+          error.response?.data?.message || "Invalid username or password.", // Use backend message if available
         status: "error",
         duration: 5000,
         isClosable: true,
       });
+    } finally {
+      setIsLoading(false); // Stop loading
     }
-
-    setIsLoading(false); // Stop loading
   };
 
   return (
@@ -59,28 +88,46 @@ const Login = () => {
         borderWidth={1}
         borderRadius="lg"
         boxShadow="lg"
+        bg="white"
       >
-        <VStack spacing={4}>
-          <Heading>Login to Your Account</Heading>
+        <VStack spacing={6}>
+          <Heading as="h1" size="xl" mb={4} color="teal.500">
+            Canteen Login
+          </Heading>
+
           <FormControl isRequired>
-            <FormLabel>Username</FormLabel>
+            <FormLabel htmlFor="username">Username</FormLabel>
             <Input
+              id="username"
               type="text"
-              placeholder="Your username"
+              placeholder="Enter your username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              focusBorderColor="teal.400"
             />
           </FormControl>
+
           <FormControl isRequired>
-            <FormLabel>Password</FormLabel>
+            <FormLabel htmlFor="password">Password</FormLabel>
             <Input
+              id="password"
               type="password"
-              placeholder="Your password"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              focusBorderColor="teal.400"
             />
           </FormControl>
-          <Button isLoading={isLoading} width="full" mt={4} type="submit">
+
+          <Button
+            isLoading={isLoading}
+            loadingText="Logging In..."
+            colorScheme="teal"
+            size="lg"
+            width="full"
+            mt={4}
+            type="submit"
+          >
             Login
           </Button>
         </VStack>

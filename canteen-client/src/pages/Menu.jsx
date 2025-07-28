@@ -1,4 +1,3 @@
-// In: src/pages/Menu.jsx
 import { useEffect, useState } from "react";
 import {
   Box,

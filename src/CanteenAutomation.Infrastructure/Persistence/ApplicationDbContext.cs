@@ -1,3 +1,4 @@
+using CanteenAutomation.Infrastructure.Persistence.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,4 +11,5 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<MenuItem> MenuItems { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<User> Users { get; set; }
 }
